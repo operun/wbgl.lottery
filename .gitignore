@@ -1,0 +1,43 @@
+.coverage
+*.egg-info
+*.log
+*.mo
+*.py?
+*.swp
+
+# dirs
+bin/
+buildout-cache/
+develop-eggs/
+eggs/
+htmlcov/
+include/
+lib/
+local/
+parts/
+src/*
+var/
+share/
+.idea/
+
+# files
+lib64
+log.html
+output.xml
+pip-selfcheck.json
+.installed.cfg
+report.html
+
+# excludes
+!.coveragerc
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitkeep
+!.travis.yml
+
+# node and grunt
+node_modules/
+package.json
+Gruntfile.js
+temp_resources

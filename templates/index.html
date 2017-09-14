@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+</head>
+
+<body>
+
+  <h1 class="heading">Wasserburg Leuchtet <span class="lottery"><a href="{{ url_for('index') }}">Lottery</a></span></h1>
+
+  {% if not random_name %}
+  <div class="container">
+    <div class="row">
+      <textarea class="form-control" name="namesList" form="form"></textarea>
+      <form id="form" class="form-group" method="POST" action="{{ url_for('index') }}">
+        <input class="btn btn-lg btn-info" type="submit" name="randomSubmit" value="Draw">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if random_name %}
+  <div class="center">
+    <h1 id="word"></h1>
+    <div id="test"></div>
+  </div>
+  <div class="winner-tickets">
+    <ul>
+      <li class="winner-ticket">
+        <i class="fa fa-ticket"></i>
+      </li>
+      <li class="winner-ticket">
+        <i class="fa fa-ticket"></i>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <a href="https://www.wasserburg-leuchtet.de">
+            <img class="wbg-logo" src="{{ url_for('static', filename='logo.png') }}" alt="">
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="https://www.operun.de">
+            <img class="operun-logo" src="{{ url_for('static', filename='operun_logo.svg') }}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  {% if random_name %}
+  <script src="{{ url_for('static', filename='js/doodle.js') }}" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var word = ["{{ random_name }}"];
+      var letters = new Letters();
+      letters.start(word[0]);
+      var eT = 0;
+      setTimeout(function() {
+        $('.winner-ticket').each(function() {
+          $(this).delay(eT).fadeTo('slow', 1);
+          eT += 800;
+        });
+        $('.winner-ticket').click(function() {
+          $('.winner-ticket').stop(true, true).fadeIn();
+        });
+      }, 4500);
+    });
+  </script>
+  {% endif %}
+
+</body>
+
+</html>
