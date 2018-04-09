@@ -18,6 +18,7 @@ def index():
     form_names = []
     filtered_names = []
     random_name = ''
+	# Get form
     if request.method == "POST":
         form_names = form.get('namesList', False)
         if len(form_names):
